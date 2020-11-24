@@ -1,7 +1,6 @@
 /* Script for bookmarklet - select text in gmail that contains date and time and create calendar event in czech format.
 author: JanKo, jankoweb(at)volny.cz
 */
-javascript:void{
 url = window.location;
 if (window.getSelection){ selection = window.getSelection(); } else if (document.getSelection) { selection = document.getSelection(); } else if (document.selection) { selection = document.selection.createRange().text; }
 /* I don't know why, but without + '' it does not work */
@@ -116,5 +115,4 @@ to = year + date_to + 'T' + time_to + '00';
 calendar = '';
 urlopen = 'https://www.google.com/calendar/render?action=TEMPLATE&dates='+from+'/'+to+'&text='+text+'&location='+map+'&details='+encodeURIComponent(selection+'\n\nmail link\n'+url)+'&src='+calendar;
 /*alert(urlopen);*/
-void(window.open(urlopen))
-});
+void(window.open(urlopen));
