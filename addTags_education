@@ -1,0 +1,1 @@
+javascript:document.execCommand('insertText', false /*no UI*/, "#education%20#science%20#popularization%22);;
