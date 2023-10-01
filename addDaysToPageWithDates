@@ -1,20 +1,17 @@
-/*var text = document.body.innerHTML; 
-reg = /[0-9]{1,2}\. ?[0-9]{1,2}\.]/g;*/
-/*
-replaced = text.replace(reg,"-"); 
-document.body.innerHTML = replaced;
-*/
 /* [https://stackoverflow.com/questions/5558613/replace-words-in-the-body-text] */
 function addDay(str){
 var elems = str.split(".");
-var date = new Date( Date.parse(elems[1] + "/" + elems[0] + "/" + new Date().getFullYear() ) );
+if (elems.length == 4)
+  var mydate = new Date( Date.parse(elems[1] + "/" + elems[0] + "/" + elems[2] ) );
+else
+  var mydate = new Date( Date.parse(elems[1] + "/" + elems[0] + "/" + new Date().getFullYear() ) );
 days = ["ne","po","út","st","čt","pá","so","ne"];
-return days[date.getDay()];
+return days[mydate.getDay()];
 }
 function walkText(node) {
   if (node.nodeType == 3) {
   /* [https://stackoverflow.com/questions/2447915/javascript-string-regex-backreferences] */
-    node.data = node.data.replace(/[0-9]{1,2}\. ?[0-9]{1,2}\./g, function(match, $1, $2, offset, original) { return $2+" (" + addDay($2) + ")" });
+    node.data = node.data.replace(/[0-9]{1,2}\. ?[0-9]{1,2}\. ?[0-9]{0,4}/g, function(match, $1, $2, offset, original) { return $2 + " (" + addDay($2) + ")" });
   }
   if (node.nodeType == 1 && node.nodeName != "SCRIPT") {
     for (var i = 0; i < node.childNodes.length; i++) {
