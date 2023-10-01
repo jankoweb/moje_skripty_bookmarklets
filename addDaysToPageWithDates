@@ -1,4 +1,13 @@
 /* [https://stackoverflow.com/questions/5558613/replace-words-in-the-body-text] */
+
+/* TEXT HTML
+<!DOCTYPE html><head><meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+ <p>3. 10.</p>
+ <p>16.10.2023 13:00 (Délka semináře)</p>
+ <p>11.10.2023 13:00 (Délka semináře)</p>
+</html>
+*/
+
 function addDay(str){
 /* edit date - add days to czech formatted date */
 var elems = str.split(".");
@@ -14,7 +23,7 @@ function walkText(node) {
 /* go through all text of page; better then innterHTML replace - it causes damage of css */
   if (node.nodeType == 3) {
   /* [https://stackoverflow.com/questions/2447915/javascript-string-regex-backreferences] */
-    node.data = node.data.replace(/[0-9]{1,2}\. ?[0-9]{1,2}\. ?[0-9]{0,4}/g, function(match, $1, $2, offset, original) { return $2 + " (" + addDay($2) + ")" });
+    node.data = node.data.replace(/[0-9]{1,2}\. ?[0-9]{1,2}\. ?[0-9]{0,4}/g, function(match, $1, $2, offset, original) { return "(" + addDay($2) + ") " + match});
   }
   if (node.nodeType == 1 && node.nodeName != "SCRIPT") {
     for (var i = 0; i < node.childNodes.length; i++) {
