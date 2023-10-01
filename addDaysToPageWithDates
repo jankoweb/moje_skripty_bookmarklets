@@ -1,5 +1,6 @@
 /* [https://stackoverflow.com/questions/5558613/replace-words-in-the-body-text] */
 function addDay(str){
+/* edit date - add days to czech formatted date */
 var elems = str.split(".");
 if (elems.length == 4)
   var mydate = new Date( Date.parse(elems[1] + "/" + elems[0] + "/" + elems[2] ) );
@@ -8,7 +9,9 @@ else
 days = ["ne","po","út","st","čt","pá","so","ne"];
 return days[mydate.getDay()];
 }
+
 function walkText(node) {
+/* go through all text of page; better then innterHTML replace - it causes damage of css */
   if (node.nodeType == 3) {
   /* [https://stackoverflow.com/questions/2447915/javascript-string-regex-backreferences] */
     node.data = node.data.replace(/[0-9]{1,2}\. ?[0-9]{1,2}\. ?[0-9]{0,4}/g, function(match, $1, $2, offset, original) { return $2 + " (" + addDay($2) + ")" });
@@ -19,4 +22,5 @@ function walkText(node) {
     }
   }
 }
+/* call main function */
 walkText(document.body);
